@@ -1,15 +1,14 @@
-FROM python:3.6-alpine
-LABEL maintainer="Zentek Servicios Tecnologicos"
+FROM python:3.9-alpine
 LABEL description="Application for deploying and running Scrapy spiders."
 
 ENV PYTHONUNBUFFERED 1
 
 RUN set -ex && apk --no-cache --virtual .build-deps add build-base g++ bash curl gcc libgcc tzdata psutils supervisor linux-headers openssl-dev postgresql-dev libffi-dev libxml2-dev libxslt-dev
 
-RUN ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
-RUN echo "America/Mexico_City" > /etc/timezone
+RUN ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+RUN echo "America/New_York" > /etc/timezone
 
-RUN pip install pip==20.2.4
+RUN pip install -U pip
 COPY ./requirements.txt /
 RUN pip install -r requirements.txt
 
